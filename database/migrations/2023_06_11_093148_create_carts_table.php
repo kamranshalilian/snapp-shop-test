@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Account;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,6 +15,12 @@ return new class extends Migration
     {
         Schema::create('carts', function (Blueprint $table) {
             $table->id();
+            $table->string("cart_number");
+            $table->string("password");
+            $table->string("cvv");
+            $table->timestamp("expiry_date");
+            $table->foreignIdFor(User::class);
+            $table->foreignIdFor(Account::class);
             $table->timestamps();
         });
     }
