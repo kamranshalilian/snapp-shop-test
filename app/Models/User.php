@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -42,4 +43,30 @@ class User extends Authenticatable
         'phone_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+    protected $appends = [
+        "counter_transaction_per_ten_min"
+    ];
+
+    public function getCounterTransactionPerTenMinAttribute()
+    {
+        return $this->transaction()
+            ->whereTime("created_at", ">", Carbon::now()->subMinutes(10)->format("H:i:s"))
+            ->where("status", "success")
+            ->count();
+    }
+
+    public function account()
+    {
+        return $this->hasMany(Account::class);
+    }
+
+    public function cart()
+    {
+        return $this->hasMany(Cart::class);
+    }
+
+    public function transaction()
+    {
+        return $this->hasMany(Transaction::class);
+    }
 }

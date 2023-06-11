@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Account extends Model
+class Transaction extends Model
 {
     use HasFactory;
 
@@ -16,8 +16,13 @@ class Account extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function cart()
+    public function cartFrom()
     {
-        return $this->hasMany(Cart::class);
+        return $this->belongsTo(Cart::class,"cart_id_from");
+    }
+
+    public function cartTo()
+    {
+        return $this->belongsTo(Cart::class,"cart_id_to");
     }
 }
