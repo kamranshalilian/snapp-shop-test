@@ -22,11 +22,6 @@ return new class extends Migration {
             $table->foreignIdFor(User::class);
             $table->timestamps();
         });
-//
-//        Schema::table('transactions', function($table) {
-//            $table->foreign("id")->on("carts")->references("cart_id_from");
-//            $table->foreign("id")->on("carts")->references("cart_id_to");
-//        });
     }
 
     /**
