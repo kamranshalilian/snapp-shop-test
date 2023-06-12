@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string("cart_number");
             $table->string("password");
             $table->unsignedInteger("cvv");
-            $table->timestamp("expiry_date");
             $table->foreignIdFor(User::class);
             $table->foreignIdFor(Account::class);
             $table->timestamps();
