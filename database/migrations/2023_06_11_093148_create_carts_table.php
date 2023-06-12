@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('carts', function (Blueprint $table) {
             $table->id();
-            $table->string("cart_number");
+            $table->string("cart_number")->unique();
             $table->string("password");
             $table->unsignedInteger("cvv");
             $table->foreignIdFor(User::class);
