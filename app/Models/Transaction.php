@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Transaction extends Model
 {
     use HasFactory;
+    protected $with = [
+        "cartFrom.account",
+        "cartTo.account",
+    ];
 
     protected $guarded = ["id"];
 

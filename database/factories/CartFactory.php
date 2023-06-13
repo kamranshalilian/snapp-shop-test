@@ -19,16 +19,17 @@ class CartFactory extends Factory
      */
     public function definition(): array
     {
-        $cart = fake()->unique()->numberBetween(1000000000000000,9999999999999999);
-        while (!Helper::checkCartDigit($cart)){
-            $cart = fake()->unique()->numberBetween(1000000000000000,9999999999999999);
+        $cart = fake()->unique()->numberBetween(1000000000000000, 9999999999999999);
+        while (!Helper::checkCartDigit($cart)) {
+            $cart = fake()->unique()->numberBetween(1000000000000000, 9999999999999999);
         }
+        $account = fake()->numberBetween(1, Account::count());
         return [
             "cart_number" => $cart,
             "password" => '$2y$10$FVus/MErlIW.3BD0Ygg/8uV7O37p0XTGFow6RbuEma8iJJvq4BdZK', //12345678
             "cvv" => fake()->numberBetween(100, 999),
-            "user_id" => User::factory(),
-            "account_id" => Account::factory(),
+            "user_id" => Account::find($account)?->user_id,
+            "account_id" => $account,
         ];
     }
 }
