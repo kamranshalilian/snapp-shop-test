@@ -20,7 +20,7 @@ class AccountFactory extends Factory
         return [
             "account_number" => fake()->unique()->numberBetween(100000000, 9999999999),
             "amount" => fake()->unique()->numberBetween(1000, 900000000),
-            "user_id" => User::factory(),
+            "user_id" => fake()->numberBetween(1, User::count()),
         ];
     }
 }

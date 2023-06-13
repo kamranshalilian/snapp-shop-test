@@ -24,8 +24,8 @@ class TransactionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "cart_number_from" => ["required", "max:16", "numeric", new BankRule()],
-            "cart_number_to" => ["required", "max:16", "numeric", new BankRule()],
+            "cart_number_from" => ["required","exists:carts,cart_number" , "max:16", "numeric", new BankRule()],
+            "cart_number_to" => ["required","exists:carts,cart_number" , "max:16", "numeric", new BankRule()],
             "price" => ["required", "numeric"],
             "cvv" => ["required", "numeric"],
             "password" => ["required", "numeric"],
